@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
+import ResultModal from './ResultModal';
 import { useState, useRef } from 'react';
+
 
 //let timer;
 
@@ -22,9 +24,11 @@ function TimerChallenge({ title, targetTime }) {
         clearTimeout(timer.current);
     }
   return (
-    <section className="challenge">
+    <>
+    {timeExpired && <ResultModal targetTime={targetTime} result="lost"/>}
+    <h1>{title}</h1><section className="challenge">
       <h2>{title}</h2>
-      {timeExpired && <p>You Lost!</p>}
+      
       <p className="challenge-time">
         {targetTime} second{targetTime > 1 ? 's' : ''}
       </p>
@@ -37,6 +41,7 @@ function TimerChallenge({ title, targetTime }) {
         {timerStarted ? 'Time is running...' : 'Timer inactive'}
       </p>
     </section>
+    </>
   );
 }
 
